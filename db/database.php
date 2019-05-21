@@ -82,11 +82,13 @@ class database
             $errorFile = $file['error'];
             $tmpFile = $file['tmp_name'];
 
-            $isValidEkstensi = ['jpg', 'jpeg', 'png'];
+            $isValidEkstensi = ['png'];
             $ektensiFoto = explode('.', $nameFile);
             $ektensiFoto = strtolower(end($ektensiFoto));
             if (!in_array($ektensiFoto, $isValidEkstensi)) {
                 return false;
+                // var_dump($ektensiFoto);
+                die();
             }
 
             if ($sizeFile < 500000 && $sizeFile > 5000000) {
@@ -134,5 +136,22 @@ class database
             $rows[] = $row;
         }
         return $rows;
+    }
+    function cekTotal($sql){
+        mysqli_next_result($this->connect);
+        $res = mysqli_query($this->connect,$sql);
+        $jumlah =  mysqli_fetch_assoc($res);
+        return $jumlah['COUNT(*)'];
+    }
+
+
+    function _execute($sql){
+        mysqli_next_result($this->connect);
+        $res = mysqli_query($this->connect,$sql);
+        if(!$res){
+            return false;
+            die();
+        }
+        return true;
     }
 }

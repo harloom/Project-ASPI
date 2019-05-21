@@ -2,7 +2,9 @@
 include "../db/database.php";
 $db = new database();
 
-$datas = $db->getPeserta();
+
+
+
 
 ?>
 
@@ -27,9 +29,33 @@ $datas = $db->getPeserta();
   <link href="assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="assets/demo/demo.css" rel="stylesheet" />
+
+    <!--  Plugin for Sweet Alert -->
+    <script src="assets/js/plugins/sweetalert2.js"></script>
 </head>
 
 <body class="">
+<?php
+
+if(isset($_REQUEST['delete'])){
+  $id = $_REQUEST['delete'];
+  if($db->_execute("call tolak_peserta ('".$id."') ;")){
+    echo "
+    <script>
+    swal.fire({
+      title: 'Infromasi!',
+      text: 'Peserta Telah Di Tolak',
+      type: 'success',
+      confirmButtonText: 'OK'
+    })
+    </script>
+    ";
+
+  }
+}
+$datas = $db->getPeserta();
+?>
+
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/img/sidebar-1.jpg">
       <!--
@@ -114,7 +140,7 @@ $datas = $db->getPeserta();
                       <th>Foto </th>
                       <th>Nama</th>
                       <th>No Handphone</th>
-                      <th>Aksi</th>
+                      <th class='text-center'>Aksi</th>
                     </thead>
                     <tbody>
                       <?php
@@ -131,7 +157,14 @@ $datas = $db->getPeserta();
                         <button class="btn btn-primary btn-round">
                           <i class="material-icons">pageview</i> 
                           Detail
-                        </button></a></td>
+                        </button></a>
+                        
+                        <a href="peserta.php?delete=<?= $dt["id_peserta"];?>">  
+                        <button class="btn btn-danger btn-round">
+                          <i class="material-icons">cancel</i> 
+                          Tolak
+                        </button></a>
+                        </td>
                       </tr>
                       <?php endforeach?>
                     </tbody>
@@ -173,8 +206,7 @@ $datas = $db->getPeserta();
   <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!-- Plugin for the momentJs  -->
   <script src="assets/js/plugins/moment.min.js"></script>
-  <!--  Plugin for Sweet Alert -->
-  <script src="assets/js/plugins/sweetalert2.js"></script>
+
   <!-- Forms Validations Plugin -->
   <script src="assets/js/plugins/jquery.validate.min.js"></script>
   <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->

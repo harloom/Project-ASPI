@@ -5,7 +5,6 @@ $db = new database();
 if (isset($_REQUEST['detail'])) {
     $id = htmlspecialchars($_REQUEST['detail']);
     $p = $db->getDetailPeserta($id);
-
     mysqli_next_result($db->connect);
     $f = $db->getFotoKontes($id);
 
@@ -114,42 +113,52 @@ if (isset($_REQUEST['detail'])) {
                   <h4 class="card-title"><?=$p['nama_depan'] . " " . $p['nama_belakang']?></h4>
                   <p class="card-category">No  : <?=$p['id_peserta']?></p>
                 </div>
+                <!-- end card -header -->
                 <div class="card-body table-responsive">
-                <div class="col-md-12 mt-5">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="#pablo">
-                    <img class="img" src="<?="upload/" . $p["url_imageKTP"]?>" />
-                  </a>
+                  <div class="row">
+                    <div class="col-md-12 mt-5 ">
+                      <div class="card card-profile">
+                        <div class="card-avatar">
+                          <a href="#pablo">
+                            <img class="img" src="<?="upload/" . $p["url_imageKTP"]?>" />
+                          </a>
+                        </div>
+                        <div class="card-body">
+                          <h6 class="card-category text-gray"><?=$p['asal_kota']?></h6>
+                          <h4 class="card-title"><?=$p['nama_depan'] . " " . $p['nama_belakang']?></h4>
+                          <p class="card-description">
+                          <?=$p['tgl_pendaftaran'] . " Telah Terdaftar"?>
+                          </p>
+                          <a href="#pablo" class="btn btn-primary btn-round">
+                          <i class="material-icons">phone</i>
+                          <?=$p['no_handphone']?></a>
+                        </div>
+                        <!-- end card body -->
+                      </div>
+                      <!-- end card profile -->
+                    </div>
+                  </div>
+                  <!-- div row -->
+                  <!-- end col -->
+                  <div class="row">
+                  <?php foreach ($f as $img): ?>
+                    <div class="col-md-5 mt-4">
+                      <img class="img-fluid rounded " src="<?="upload_kontes/" . $img['url_image']?>"  alt="Cinque Terre">
+                      </div>
+                  <?php endforeach?>
+                  </div>
                 </div>
-                <div class="card-body">
-                  <h6 class="card-category text-gray"><?=$p['asal_kota']?></h6>
-                  <h4 class="card-title"><?=$p['nama_depan'] . " " . $p['nama_belakang']?></h4>
-                  <p class="card-description">
-                  <?=$p['tgl_pendaftaran'] . " Telah Terdaftar"?>
-                  </p>
-                  <a href="#pablo" class="btn btn-primary btn-round">
-                  <i class="material-icons">phone</i>
-                  <?=$p['no_handphone']?></a>
-                </div>
+                <!-- end card body -->
               </div>
-              <?php foreach($f as $img) : ?>
-              <div class="col-md-12 mt-5">
-              <div class="card-body">
-              <img src="<?= "upload_kontes/".$img['url_image'] ?>" class="img-rounded" alt="Cinque Terre">
-                </div>
-                </div>
-              <?php endforeach ?>
-              
+              <!-- end card -->
             </div>
-                </div>
-              </div>
-            </div>
+            <!-- <end col -->
           </div>
-
-
+          <!-- end row -->
         </div>
+        <!-- end container -->
       </div>
+      <!-- end content -->
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">

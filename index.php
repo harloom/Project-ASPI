@@ -171,7 +171,7 @@
                     <div class="team-player">
                       <div class="card card-plain">
                         <div class="col-md-6 ml-auto mr-auto">
-                          <img src="assets/img/faces/avatar.jpg" alt="Thumbnail Image"
+                          <img src="assets/img/faces/oscar_motuloh.jpg" alt="Thumbnail Image"
                             class="img-raised rounded-circle img-fluid">
                         </div>
                         <h4 class="card-title">Oscar Motuloh
@@ -179,9 +179,7 @@
                           <small class="card-description text-muted">(Antara)</small>
                         </h4>
                         <div class="card-body">
-                          <p class="card-description">You can write here details about one of your team members. You can
-                            give more details about what they do. Feel free to add some
-                            <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                          <p class="card-description"> Oscar Motuloh adalah seorang wartawan foto dan kurator dari Galeri Foto Jurnalistik Antara yang hasil karya dan pencapaiannya telah diakui baik di nusantara maupun di luar negeri. Oscar memulai karirnya sebagai seorang wartawan setelah beliau mengambil kursus di Kantor Berita Antara pada tahun 1988. Dua tahun kemudian, di tahun 1990, beliau lalu ditunjuk untuk menduduki posisi dalam divisi fotografi tanpa adanya pengalaman di bidang itu. Dibekali hanya dengan kemampuan jurnalistik, Oscar memulai untuk belajar tentang foto jurnalistik - dimana beliau akhirnya menemukan ketertarikannya terhadap penyampaian berita melalui sisi visual dari jurnalisme.
                         </div>
                         <div class="card-footer justify-content-center">
                           <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-twitter"></i></a>
@@ -195,7 +193,7 @@
                     <div class="team-player">
                       <div class="card card-plain">
                         <div class="col-md-6 ml-auto mr-auto">
-                          <img src="assets/img/faces/christian.jpg" alt="Thumbnail Image"
+                          <img src="assets/img/faces/arbainrambey.png" alt="Thumbnail Image"
                             class="img-raised rounded-circle img-fluid">
                         </div>
                         <h4 class="card-title">Arbain Rambey
@@ -203,12 +201,11 @@
                           <small class="card-description text-muted">(Kompas)</small>
                         </h4>
                         <div class="card-body">
-                          <p class="card-description">You can write here details about one of your team members. You can
-                            give more details about what they do. Feel free to add some
-                            <a href="#">links</a> for people to be able to follow them outside the site.</p>
+                          <p class="card-description">Tukang foto yang senang bicara fotografi... Kolektor aneka benda yang senang pada hal-hal yang membuat hidup ini indah.
+                            <a href="https://arbainrambey.com/">links</a> for people to be able to follow them outside the site.</p>
                         </div>
                         <div class="card-footer justify-content-center">
-                          <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-twitter"></i></a>
+                          <a href="https://twitter.com/arbainrambey?lang=id" class="btn btn-link btn-just-icon"><i class="fa fa-twitter"></i></a>
                           <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-linkedin"></i></a>
                         </div>
                       </div>
@@ -218,7 +215,7 @@
                     <div class="team-player">
                       <div class="card card-plain">
                         <div class="col-md-6 ml-auto mr-auto">
-                          <img src="assets/img/faces/kendall.jpg" alt="Thumbnail Image"
+                          <img src="assets/img/faces/kementrian.jpg" alt="Thumbnail Image"
                             class="img-raised rounded-circle img-fluid">
                         </div>
                         <h4 class="card-title">Perwakilan Kementerian PUPR
@@ -226,10 +223,7 @@
                           <small class="card-description text-muted">Kementrian</small>
                         </h4>
                         <div class="card-body">
-                          <p class="card-description">You can write here details about one of your team members. You can
-                            give more details about what they do. Feel free to add some
-                            <a href="#">links</a> for people to be able to follow them outside the site.</p>
-                        </div>
+                          <p class="card-description">mewujudkan pelayanan informasi publik Kementerian Pekerjaan Umum dan Perumahan Rakyat yang cepat, tepat, dan sederhana. Salah satunya melalui layanan informasi publik online e-PPID.  </div>
                         <div class="card-footer justify-content-center">
                           <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-twitter"></i></a>
                           <a href="#pablo" class="btn btn-link btn-just-icon"><i class="fa fa-instagram"></i></a>
