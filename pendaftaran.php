@@ -1,19 +1,13 @@
 <?php
-include("db/database.php");
+include "db/database.php";
 $_db = new database();
 
-// $flag = $_db->insertFotoTable(21,'5ce34f6caa4a8.png');
-// var_dump(flag);
-// die();
-// print 'e';
-
 //validation upload
-  if(isset($_POST['txtNamaDepan'],$_POST['txtNamaBelakang'],$_POST['jenis_kelamin'],$_POST['txtEmail'],
-  $_POST['txtNumber'],$_POST['txtAlamat'],$_POST['txtAsalKota'],$_FILES['foto_ktp'],$_FILES['foto_kontes'])){
-    
-    
-    $v_id_peserta = "P".uniqid();
-    $v_namaDepan =  htmlspecialchars($_POST['txtNamaDepan']);
+if (isset($_POST['txtNamaDepan'], $_POST['txtNamaBelakang'], $_POST['jenis_kelamin'], $_POST['txtEmail'],
+    $_POST['txtNumber'], $_POST['txtAlamat'], $_POST['txtAsalKota'], $_FILES['foto_ktp'], $_FILES['foto_kontes'])) {
+
+    $v_id_peserta = "P" . uniqid();
+    $v_namaDepan = htmlspecialchars($_POST['txtNamaDepan']);
     $v_namaBelakang = htmlspecialchars($_POST['txtNamaBelakang']);
     $v_jenisKelamin = htmlspecialchars($_POST['jenis_kelamin']);
     $v_email = htmlspecialchars($_POST['txtEmail']);
@@ -21,27 +15,21 @@ $_db = new database();
     $v_alamat = htmlspecialchars($_POST['txtAlamat']);
     $v_asalKota = htmlspecialchars($_POST['txtAsalKota']);
 
-
-
-  
     $f_ktp = $_db->uploadKTP($_FILES);
-    if(!$f_ktp){
-      echo "<script>alert('Periksa foto KTP')</script>";
-    }else{
+    if (!$f_ktp) {
+        echo "<script>alert('Periksa foto KTP')</script>";
+    } else {
 
-        $data = new Peserta($v_id_peserta,$v_namaDepan,$f_ktp,$v_number,$v_alamat,$v_namaBelakang,$v_jenisKelamin,
-                $v_asalKota,$v_email,date("Y-m-d"));
-      $respon = $_db->input($data);
-      $arr = mysqli_fetch_array($respon,MYSQLI_ASSOC);
-      $flagFotoKontes = $_db->uploadFotoKontes($_FILES,  $arr['id_peserta']);
-      if ($flagFotoKontes) {
-        echo "<script>alert('Pendaftaran Selesai')</script>";
+        $data = new Peserta($v_id_peserta, $v_namaDepan, $f_ktp, $v_number, $v_alamat, $v_namaBelakang, $v_jenisKelamin,
+            $v_asalKota, $v_email, date("Y-m-d"));
+        $respon = $_db->input($data);
+        $arr = mysqli_fetch_array($respon, MYSQLI_ASSOC);
+        $flagFotoKontes = $_db->uploadFotoKontes($_FILES, $arr['id_peserta']);
+        if ($flagFotoKontes) {
+            echo "<script>alert('Pendaftaran Selesai')</script>";
+        }
     }
-  }
 }
-
-
-
 
 ?>
 
