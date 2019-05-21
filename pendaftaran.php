@@ -1,3 +1,52 @@
+<?php
+include("db/database.php");
+$_db = new database();
+
+// $flag = $_db->insertFotoTable(21,'5ce34f6caa4a8.png');
+// var_dump(flag);
+// die();
+// print 'e';
+
+//validation upload
+  if(isset($_POST['txtNamaDepan'],$_POST['txtNamaBelakang'],$_POST['jenis_kelamin'],$_POST['txtEmail'],
+  $_POST['txtNumber'],$_POST['txtAlamat'],$_POST['txtAsalKota'],$_FILES['foto_ktp'],$_FILES['foto_kontes'])){
+    
+    $v_namaDepan =  htmlspecialchars($_POST['txtNamaDepan']);
+    $v_namaBelakang = htmlspecialchars($_POST['txtNamaBelakang']);
+    $v_jenisKelamin = htmlspecialchars($_POST['jenis_kelamin']);
+    $v_email = htmlspecialchars($_POST['txtEmail']);
+    $v_number = htmlspecialchars($_POST['txtNumber']);
+    $v_alamat = htmlspecialchars($_POST['txtAlamat']);
+    $v_asalKota = htmlspecialchars($_POST['txtAsalKota']);
+
+
+
+  //upload FotoKTP
+  $flagFotoKTP = $_db->uploadKTP($_FILES);
+  //cek kondisi jika gambarKTP terupload
+  if(!$flagFotoKTP){
+    echo "<script>alert('Periksa foto KTP')</script>";
+  }else{
+    $respon = $_db->input(new Peserta($v_namaDepan,$flagFotoKTP,$v_number,$v_alamat,$v_namaBelakang,$v_jenisKelamin,
+              $v_asalKota,$v_email,date("Y-m-d")));
+    $id_peserta = mysqli_fetch_array($respon,MYSQLI_ASSOC);
+    //upload fotoKontes
+    $flagFotoKontes = $_db->uploadFotoKontes($_FILES,$id_peserta['id_peserta']);
+    // var_dump($flagFotoKontes);
+    if ($flagFotoKontes) {
+      echo "<script>alert('Pendaftaran Selesai')</script>";
+    }
+  }
+}
+
+
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,7 +116,7 @@
         </div>
       </div>
     </nav>
-<!--  -->
+    <!--  -->
     <div class="page-header header-filter"
       style="background-image: url('assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
       <div class="container">
@@ -85,7 +134,7 @@
       <div class="container">
         <div class="row">
           <div class="card card-login">
-            <form class="form" method="POST" action="">
+            <form class="form" action="pendaftaran.php" method="POST" enctype="multipart/form-data" >
               <div class="card-header card-header-success text-center">
                 <h4 class="card-title">Form pendaftaran</h4>
               </div>
@@ -96,14 +145,13 @@
                       <i class="material-icons">face</i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="First Name...">
+                  <input type="text" name="txtNamaDepan" class="form-control" placeholder="First Name..." require/>
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="material-icons">nature_people</i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Last Name...">
-                </div>
+                  <input type="text" name="txtNamaBelakang" class="form-control" placeholder="Last Name..." required/>                </div>
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -111,8 +159,8 @@
 
                     </span>
                   </div>
-
-                  <select class="form-control selectpicker" data-style="btn btn-link" id="jenis_kelamin">
+                  <select name="jenis_kelamin" class="form-control selectpicker" data-style="btn btn-link"
+                    id="jenis_kelamin">
                     <option>Pria</option>
                     <option>Wanita</option>
                   </select>
@@ -123,7 +171,7 @@
                       <i class="material-icons">email</i>
                     </span>
                   </div>
-                  <input type="email" class="form-control" placeholder="Email...">
+                  <input type="email" name="txtEmail" class="form-control" placeholder="Email..." required/>
                 </div>
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -131,7 +179,7 @@
                       <i class="material-icons">phone</i>
                     </span>
                   </div>
-                  <input type="number" class="form-control" placeholder="No Handphone...">
+                  <input type="number" name="txtNumber" class="form-control" placeholder="No Handphone..." required>
                 </div>
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -139,7 +187,7 @@
                       <i class="material-icons">location_on</i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Alamat...">
+                  <input type="text" name="txtAlamat" class="form-control" placeholder="Alamat..." required>
                 </div>
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -147,7 +195,7 @@
                       <i class="material-icons">location_city</i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Asal Kota...">
+                  <input type="text" name="txtAsalKota" class="form-control" placeholder="Asal Kota..." required>
                 </div>
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -165,7 +213,7 @@
                       <i class="material-icons">attach_file</i>
                     </span>
                   </div>
-                  <input type="file" class="inputFileHidden" id="ktp_foto">
+                  <input type="file" name="foto_ktp" class="inputFileHidden" id="ktp_foto" required>
                 </div>
 
                 <div class="input-group">
@@ -183,8 +231,7 @@
                       <i class="material-icons">attach_file</i>
                     </span>
                   </div>
-                  <form action="/file-upload" class="dropzone" id="my-awesome-dropzone"></form>
-                  <input name="foto_kontes[]" type="file" multiple="" class="inputFileHidden" id="foto_kontes">
+                  <input name="foto_kontes[]" type="file" multiple="" class="inputFileHidden" id="foto_kontes" >
                 </div>
               </div>
               <script>
@@ -197,11 +244,8 @@
                   }
                 });
               </script>
-
-
-
               <div class="footer text-center">
-                <button href="#" class="btn btn-success btn-round m-5" type="submit">
+                <button type="submit"  class="btn btn-success btn-round m-5">
                   <i class="material-icons">favorite</i> Send
                 </button>
               </div>
