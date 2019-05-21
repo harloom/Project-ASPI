@@ -1,4 +1,5 @@
 <?php 
+
 include("Peserta.php");
 class database{
 
@@ -7,7 +8,6 @@ class database{
 	var $pass = "";
 	var $db = "db_aspi";
 	var $connect ;
-
 	// CALL daftar_peserta('Nanda','upload/foto/iasdasad.jph','082307304530','Bandar Lampung','upload/dokumen/iasdasad.jph','Solehudin','Pria','BandarLampung','Harloom@gmail.com','2019-04-12');
 
 
@@ -19,7 +19,7 @@ class database{
 
 
 	function input(Peserta $peserta){
-		$sql ="CALL daftar_peserta('$peserta->nama','$peserta->url_ktp','$peserta->no_hp','$peserta->alamat'
+		$sql ="CALL daftar_peserta('$peserta->id_peserta','$peserta->nama','$peserta->url_ktp','$peserta->no_hp','$peserta->alamat'
 		,'$peserta->namaBelakang','$peserta->jenisKelamin','$peserta->asalKota','$peserta->email','$peserta->tglPendaftaran')"; 
 		$flag = mysqli_query($this->connect,$sql);
 			return $flag;
@@ -61,19 +61,9 @@ class database{
 
 	}
 
-	function insertFotoTable($id_peserta, $nameFile){
-			print $id_peserta." : ".$nameFile;
-			$id_peserta = (int) $id_peserta;
-			$sqlFotoKontes = "CALL insert_foto_kontes($id_peserta,'$nameFile')";
-			$flag = mysqli_query($this->connect,$sqlFotoKontes);
-			var_dump($flag);
-
-
-	
-		}
 
 	function uploadFotoKontes($data,$id_peserta){
-		$id = $id_peserta;
+		
 		$file_ary = array();
     $file_count = count($data['foto_kontes']['size']);
     $file_keys = array_keys($data['foto_kontes']);
@@ -108,15 +98,23 @@ class database{
 				$newNameFile.=$ektensiFoto;
 				move_uploaded_file($tmpFile,'dashboard/upload_kontes/'.$newNameFile);
 
-				$this->insertFotoTable($id,$newNameFile);
-			}
-		
+				// $this->insertFotoTable($id_peserta,$newNameFile);
 
+				print $id_peserta." : ".$newNameFile;
+				$id = $id_peserta;
+				$sqlFotoKontes = "CALL insert_foto_kontes ('$id','$newNameFile') ;";
+				mysqli_next_result($this->connect);
+				if(!mysqli_query($this->connect,$sqlFotoKontes)){
+					var_dump(mysqli_error($this->connect));
+				}	
+
+
+		}
 	}
-
+}	
 
 	
-} 
+
 
 
 ?>

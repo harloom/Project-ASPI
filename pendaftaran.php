@@ -11,6 +11,8 @@ $_db = new database();
   if(isset($_POST['txtNamaDepan'],$_POST['txtNamaBelakang'],$_POST['jenis_kelamin'],$_POST['txtEmail'],
   $_POST['txtNumber'],$_POST['txtAlamat'],$_POST['txtAsalKota'],$_FILES['foto_ktp'],$_FILES['foto_kontes'])){
     
+    
+    $v_id_peserta = "P".uniqid();
     $v_namaDepan =  htmlspecialchars($_POST['txtNamaDepan']);
     $v_namaBelakang = htmlspecialchars($_POST['txtNamaBelakang']);
     $v_jenisKelamin = htmlspecialchars($_POST['jenis_kelamin']);
@@ -21,20 +23,19 @@ $_db = new database();
 
 
 
-  //upload FotoKTP
-  $flagFotoKTP = $_db->uploadKTP($_FILES);
-  //cek kondisi jika gambarKTP terupload
-  if(!$flagFotoKTP){
-    echo "<script>alert('Periksa foto KTP')</script>";
-  }else{
-    $respon = $_db->input(new Peserta($v_namaDepan,$flagFotoKTP,$v_number,$v_alamat,$v_namaBelakang,$v_jenisKelamin,
-              $v_asalKota,$v_email,date("Y-m-d")));
-    $id_peserta = mysqli_fetch_array($respon,MYSQLI_ASSOC);
-    //upload fotoKontes
-    $flagFotoKontes = $_db->uploadFotoKontes($_FILES,$id_peserta['id_peserta']);
-    // var_dump($flagFotoKontes);
-    if ($flagFotoKontes) {
-      echo "<script>alert('Pendaftaran Selesai')</script>";
+  
+    $f_ktp = $_db->uploadKTP($_FILES);
+    if(!$f_ktp){
+      echo "<script>alert('Periksa foto KTP')</script>";
+    }else{
+
+        $data = new Peserta($v_id_peserta,$v_namaDepan,$f_ktp,$v_number,$v_alamat,$v_namaBelakang,$v_jenisKelamin,
+                $v_asalKota,$v_email,date("Y-m-d"));
+      $respon = $_db->input($data);
+      $arr = mysqli_fetch_array($respon,MYSQLI_ASSOC);
+      $flagFotoKontes = $_db->uploadFotoKontes($_FILES,  $arr['id_peserta']);
+      if ($flagFotoKontes) {
+        echo "<script>alert('Pendaftaran Selesai')</script>";
     }
   }
 }

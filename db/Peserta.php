@@ -1,6 +1,7 @@
 <?php
 
 class Peserta{
+  public $id_peserta;
   public $nama ; 
   public $url_ktp ; 
   public $no_hp ; 
@@ -13,7 +14,8 @@ class Peserta{
 
 
 
-	function __construct( $nama ,$url_ktp ,$no_hp , $alamat  , $namaBelakang, $jenisKelamin, $asalKota , $email ,$tglPendaftaran ){
+	function __construct( $id,$nama ,$url_ktp ,$no_hp , $alamat  , $namaBelakang, $jenisKelamin, $asalKota , $email ,$tglPendaftaran ){
+    $this->id_peserta = $id;
     $this->nama = $nama;
     $this->url_ktp = $url_ktp;
     $this->no_hp = $no_hp;
