@@ -170,6 +170,7 @@ $datas = $db->getPeserta();
                         </button></a>
                         </td>
                       </tr>
+                        <?php $i++; ?>
                       <?php endforeach?>
                     </tbody>
                   </table>

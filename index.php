@@ -90,7 +90,7 @@
           <li class="nav-item">
             <a class="nav-link active" href="#dashboard-1" role="tab" data-toggle="tab">
               <i class="material-icons">dashboard</i>
-              Dashboard
+              Home
             </a>
           </li>
           <li class="nav-item">
@@ -309,7 +309,8 @@
 
                 </div>
                 <div class="row">
-                  <p>1. Karya foto dikirim selambat-lambatnya Minggu, 25 November 2018</p>
+                  <p>1. Karya foto dikirim selambat-lambatnya Rabu, 22 Mei 2019</p>
+                  <p>2. Penetuan Pemenang akan di informasikan pada  Kamis, 23 Mei 2019</p>
                 </div>
               </div>
 

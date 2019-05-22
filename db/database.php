@@ -82,7 +82,7 @@ class database
             $errorFile = $file['error'];
             $tmpFile = $file['tmp_name'];
 
-            $isValidEkstensi = ['png'];
+            $isValidEkstensi = ['jpg', 'jpeg', 'png'];
             $ektensiFoto = explode('.', $nameFile);
             $ektensiFoto = strtolower(end($ektensiFoto));
             if (!in_array($ektensiFoto, $isValidEkstensi)) {
