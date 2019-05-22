@@ -1,9 +1,13 @@
 <?php
+session_start();
+
+if(!isset($_SESSION["login"])){
+  header("Location: ../");
+  exit;
+}
+
 include "../db/database.php";
 $db = new database();
-
-
-
 
 
 ?>
@@ -116,7 +120,7 @@ $datas = $db->getPeserta();
                   <a class="dropdown-item" href="#">Profile</a>
                   <a class="dropdown-item" href="#">Settings</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Log out</a>
+                  <a class="dropdown-item" href="logout.php">Log out</a>
                 </div>
               </li>
             </ul>

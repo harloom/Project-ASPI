@@ -154,4 +154,13 @@ class database
         }
         return true;
     }
+
+    function login($username ,$password){
+        mysqli_next_result($this->connect);
+        $sql ="call login('$username','$password');";
+        $res = mysqli_query($this->connect,$sql);
+        // $flag =  mysqli_fetch_assoc($res);
+        return $res ;
+        
+    }
 }
